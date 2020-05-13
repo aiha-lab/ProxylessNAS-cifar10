@@ -14,6 +14,7 @@ from proxyless_nas.utils import AverageMeter, accuracy
 
 from proxyless_nas import model_zoo
 
+
 model_names = sorted(name for name in model_zoo.__dict__
                      if name.islower() and not name.startswith("__")
                      and callable(model_zoo.__dict__[name]))

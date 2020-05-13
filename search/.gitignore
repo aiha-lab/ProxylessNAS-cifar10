@@ -14,3 +14,7 @@ checkpoints/cache
 
 # pycharm
 *.idea*
+
+*.txt
+*.sh
+result/

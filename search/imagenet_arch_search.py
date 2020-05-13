@@ -8,6 +8,8 @@ from models import ImagenetRunConfig
 from nas_manager import *
 from models.super_nets.super_proxyless import SuperProxylessNASNets
 
+import pdb
+
 # ref values
 ref_values = {
     'flops': {
@@ -39,7 +41,7 @@ parser.add_argument('--init_lr', type=float, default=0.025)
 parser.add_argument('--lr_schedule_type', type=str, default='cosine')
 # lr_schedule_param
 
-parser.add_argument('--dataset', type=str, default='imagenet', choices=['imagenet'])
+parser.add_argument('--dataset', type=str, default='imagenet', choices=['imagenet','cifar10'])
 parser.add_argument('--train_batch_size', type=int, default=256)
 parser.add_argument('--test_batch_size', type=int, default=1000)
 parser.add_argument('--valid_size', type=int, default=50000)
@@ -183,7 +185,6 @@ if __name__ == '__main__':
 
     # arch search run manager
     arch_search_run_manager = ArchSearchRunManager(args.path, super_net, run_config, arch_search_config)
-
     # resume
     if args.resume:
         try:

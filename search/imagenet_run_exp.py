@@ -12,6 +12,7 @@ import torch
 from models import *
 from run_manager import RunManager
 
+import pdb
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--path', type=str, default=None)
@@ -23,11 +24,11 @@ parser.add_argument('--resume', action='store_true')
 parser.add_argument('--latency', type=str, default=None)
 
 parser.add_argument('--n_epochs', type=int, default=300)
-parser.add_argument('--init_lr', type=float, default=0.05)
+parser.add_argument('--init_lr', type=float, default=0.1)
 parser.add_argument('--lr_schedule_type', type=str, default='cosine')
 # lr_schedule_param
 
-parser.add_argument('--dataset', type=str, default='imagenet', choices=['imagenet'])
+parser.add_argument('--dataset', type=str, default='imagenet', choices=['imagenet', 'cifar10'])
 parser.add_argument('--train_batch_size', type=int, default=256)
 parser.add_argument('--test_batch_size', type=int, default=500)
 parser.add_argument('--valid_size', type=int, default=None)
@@ -68,7 +69,6 @@ if __name__ == '__main__':
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
 
     os.makedirs(args.path, exist_ok=True)
-
     # prepare run config
     run_config_path = '%s/run.config' % args.path
     if os.path.isfile(run_config_path):
@@ -89,10 +89,13 @@ if __name__ == '__main__':
         run_config = ImagenetRunConfig(
             **args.__dict__
         )
+    ###edit
+    run_config.__dict__['n_epochs']=args.n_epochs
+    run_config.__dict__['init_lr']=args.init_lr
+
     print('Run config:')
     for k, v in run_config.config.items():
         print('\t%s: %s' % (k, v))
-
     # prepare network
     net_config_path = '%s/net.config' % args.path
     if os.path.isfile(net_config_path):
@@ -130,7 +133,8 @@ if __name__ == '__main__':
             checkpoint = torch.load(init_path, map_location='cpu')
         if 'state_dict' in checkpoint:
             checkpoint = checkpoint['state_dict']
-        run_manager.net.module.load_state_dict(checkpoint)
+        #edit, no use search parameters
+        #run_manager.net.module.load_state_dict(checkpoint)
     elif 'proxyless' in args.net and not args.train:
         from utils.latency_estimator import download_url
         pretrained_weight_url = 'https://hanlab.mit.edu/files/proxylessNAS/%s.pth' % args.net

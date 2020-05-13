@@ -5,6 +5,7 @@
 from modules.layers import *
 import json
 
+import pdb
 
 def proxyless_base(net_config=None, n_classes=1000, bn_param=(0.1, 1e-3), dropout_rate=0):
     assert net_config is not None, 'Please input a network config'

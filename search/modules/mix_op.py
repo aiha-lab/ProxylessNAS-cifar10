@@ -9,6 +9,7 @@ import torch.nn.functional as F
 
 from modules.layers import *
 
+import pdb
 
 def build_candidate_ops(candidate_ops, in_channels, out_channels, stride, ops_order):
     if candidate_ops is None:

@@ -9,6 +9,7 @@ from modules.mix_op import *
 from models.normal_nets.proxyless_nets import *
 from utils import LatencyEstimator
 
+import pdb
 
 class SuperProxylessNASNets(ProxylessNASNets):
 
@@ -23,9 +24,15 @@ class SuperProxylessNASNets(ProxylessNASNets):
             width_stages[i] = make_divisible(width_stages[i] * width_mult, 8)
 
         # first conv layer
-        first_conv = ConvLayer(
-            3, input_channel, kernel_size=3, stride=2, use_bn=True, act_func='relu6', ops_order='weight_bn_act'
-        )
+        if n_classes==1000:
+            first_conv = ConvLayer(
+                3, input_channel, kernel_size=3, stride=2, use_bn=True, act_func='relu6', ops_order='weight_bn_act'
+            )
+        else:
+            first_conv = ConvLayer(
+                3, input_channel, kernel_size=3, stride=1, use_bn=True, act_func='relu6', ops_order='weight_bn_act'
+            )
+
 
         # first block
         first_block_conv = MixedEdge(candidate_ops=build_candidate_ops(
@@ -64,8 +71,9 @@ class SuperProxylessNASNets(ProxylessNASNets):
 
         # feature mix layer
         last_channel = make_divisible(1280 * width_mult, 8) if width_mult > 1.0 else 1280
+        ###edit
         feature_mix_layer = ConvLayer(
-            input_channel, last_channel, kernel_size=1, use_bn=True, act_func='relu6', ops_order='weight_bn_act',
+            input_channel, last_channel, kernel_size=1, use_bn=True, act_func='relu', ops_order='weight_bn_act',
         )
 
         classifier = LinearLayer(last_channel, n_classes, dropout_rate=dropout_rate)

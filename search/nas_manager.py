@@ -3,7 +3,9 @@
 # International Conference on Learning Representations (ICLR), 2019.
 
 from run_manager import *
+from datetime import datetime
 
+import pdb
 
 class ArchSearchConfig:
 
@@ -250,6 +252,7 @@ class ArchSearchRunManager:
 
         for epoch in range(self.warmup_epoch, warmup_epochs):
             print('\n', '-' * 30, 'Warmup epoch: %d' % (epoch + 1), '-' * 30, '\n')
+            print('time: ', datetime.now())
             batch_time = AverageMeter()
             data_time = AverageMeter()
             losses = AverageMeter()
@@ -343,6 +346,7 @@ class ArchSearchRunManager:
 
         for epoch in range(self.run_manager.start_epoch, self.run_manager.run_config.n_epochs):
             print('\n', '-' * 30, 'Train epoch: %d' % (epoch + 1), '-' * 30, '\n')
+            print('time: ', datetime.now())
             batch_time = AverageMeter()
             data_time = AverageMeter()
             losses = AverageMeter()
