@@ -1,4 +1,11 @@
-  
+# CIFAR10 Search
+```bash
+cd search
+bash cifar10_search.sh
+```
+
+
+
 # ProxylessNAS: Direct Neural Architecture Search on Target Task and Hardware [[Website]](https://hanlab.mit.edu/projects/proxylessNAS/) [[arXiv]](https://arxiv.org/abs/1812.00332) [[Poster]](https://hanlab.mit.edu/files/proxylessNAS/figures/ProxylessNAS_iclr_poster_final.pdf)
 ```bash
 @inproceedings{
