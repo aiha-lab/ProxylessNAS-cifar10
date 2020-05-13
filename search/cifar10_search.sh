@@ -1,0 +1,1 @@
+python imagenet_arch_search.py --path '/home/hanyang/seoki/proxylessnas/search/result/' --width_stages '24,32,64,96,160,320' --n_cell_stages '2,3,4,3,3,1' --stride_stages '1,2,2,1,2,1' --gpu 1 --dataset cifar10 --target_hardware flops --grad_reg_loss_type 'add#linear'

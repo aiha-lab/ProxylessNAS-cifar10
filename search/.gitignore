@@ -16,5 +16,6 @@ checkpoints/cache
 *.idea*
 
 *.txt
-*.sh
+experiment.sh
+experiment2.sh
 result/
