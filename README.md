@@ -3,7 +3,11 @@
 cd search
 bash cifar10_search.sh
 ```
-
+# Training searched model
+```bash
+cd search
+python imagenet_run_exp.py --path {path} --gpu 1 --train
+```
 
 
 # ProxylessNAS: Direct Neural Architecture Search on Target Task and Hardware [[Website]](https://hanlab.mit.edu/projects/proxylessNAS/) [[arXiv]](https://arxiv.org/abs/1812.00332) [[Poster]](https://hanlab.mit.edu/files/proxylessNAS/figures/ProxylessNAS_iclr_poster_final.pdf)
