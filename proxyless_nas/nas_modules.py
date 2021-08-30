@@ -11,6 +11,7 @@ class MobileInvertedResidualBlock(BasicUnit):
         self.shortcut = shortcut
 
     def forward(self, x):
+        import pdb; pdb.set_trace()
         if self.mobile_inverted_conv.is_zero_layer():
             res = x
         elif self.shortcut is None or self.shortcut.is_zero_layer():

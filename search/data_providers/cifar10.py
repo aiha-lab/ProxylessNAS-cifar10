@@ -23,9 +23,9 @@ class CIFAR10DataProvider(DataProvider):
         lists = [transforms.RandomHorizontalFlip(), transforms.RandomCrop(32, padding=4), transforms.ToTensor(), transforms.Normalize(mean, std)]
         train_transform = transforms.Compose(lists)
         test_transform  = transforms.Compose([transforms.ToTensor(), transforms.Normalize(mean, std)])
-        train_dataset = datasets.CIFAR10('/home/hanyang/seoki/data', train=True, transform=train_transform)
+        train_dataset = datasets.CIFAR10('/raid', train=True, transform=train_transform)
 
-        split_file_path = Path('/home/hanyang/seoki/proxylessnas/search/split/4.5_0.5.pth')
+        split_file_path = Path('/home/parks/ProxylessNAS/search/split/4.5_0.5.pth')
         split_info      = torch.load(split_file_path)
         train_split, valid_split = split_info['train'], split_info['valid']
 
@@ -34,7 +34,7 @@ class CIFAR10DataProvider(DataProvider):
                 valid_size = int(valid_size * len(train_dataset))
             else:
                 assert isinstance(valid_size, int), 'invalid valid_size: %s' % valid_size
-            valid_dataset = datasets.CIFAR10('/home/hanyang/seoki/data', train=True, transform=train_transform)
+            valid_dataset = datasets.CIFAR10('/raid', train=True, transform=train_transform)
 
             self.train = torch.utils.data.DataLoader(
                 train_dataset, batch_size=train_batch_size,  sampler=torch.utils.data.sampler.SubsetRandomSampler(train_split),
@@ -52,7 +52,7 @@ class CIFAR10DataProvider(DataProvider):
             self.valid = None
 
         self.test = torch.utils.data.DataLoader(
-            datasets.CIFAR10('/home/hanyang/seoki/data', train=False,transform= train_transform), batch_size=test_batch_size, shuffle=False, num_workers=n_worker, pin_memory=True,
+            datasets.CIFAR10('/raid', train=False,transform= train_transform), batch_size=test_batch_size, shuffle=False, num_workers=n_worker, pin_memory=True,
         )
         if self.valid is None:
             self.valid = self.test
