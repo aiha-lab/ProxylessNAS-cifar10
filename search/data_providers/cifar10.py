@@ -52,7 +52,7 @@ class CIFAR10DataProvider(DataProvider):
             self.valid = None
 
         self.test = torch.utils.data.DataLoader(
-            datasets.CIFAR10('/raid', train=False,transform= train_transform), batch_size=test_batch_size, shuffle=False, num_workers=n_worker, pin_memory=True,
+            datasets.CIFAR10('/raid', train=False,transform= test_transform), batch_size=test_batch_size, shuffle=False, num_workers=n_worker, pin_memory=True,
         )
         if self.valid is None:
             self.valid = self.test
