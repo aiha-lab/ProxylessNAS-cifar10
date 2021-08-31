@@ -34,7 +34,7 @@ class CIFAR10DataProvider(DataProvider):
                 valid_size = int(valid_size * len(train_dataset))
             else:
                 assert isinstance(valid_size, int), 'invalid valid_size: %s' % valid_size
-            valid_dataset = datasets.CIFAR10('/raid', train=True, transform=train_transform)
+            valid_dataset = datasets.CIFAR10('/raid', train=True, transform=test_transform)
 
             self.train = torch.utils.data.DataLoader(
                 train_dataset, batch_size=train_batch_size,  sampler=torch.utils.data.sampler.SubsetRandomSampler(train_split),
